@@ -13,7 +13,7 @@
                 <img src="./assets/epicode_logo.png" />
             </header>
             <main>
-                <div id="welcome-pane" class="hidden">
+                <div id="welcome-pane">
                     <h1>Welcome to <br /><strong>your exam</strong></h1>
 
                     <h3 class="epicode-pink-text">Instructions</h3>
@@ -119,9 +119,37 @@
                         <button>Rate Us</button>
                     </div>
                 </div>
-                <div id="feedback-pane">
+                <div id="feedback-pane" class="hidden">
                     <h1>Tell us how it's going</h1>
-                    <p></p>
+                    <p>
+                        From 0 to 10, how likely are you to recommend EPICODE to
+                        a friend or a colleague?
+                    </p>
+                    <div class="stars">
+                        <div class="star"></div>
+                        <div class="star"></div>
+                        <div class="star"></div>
+                        <div class="star"></div>
+                        <div class="star"></div>
+                        <div class="star"></div>
+                        <div class="star"></div>
+                        <div class="star"></div>
+                        <div class="star"></div>
+                        <div class="star"></div>
+                    </div>
+
+                    <p>
+                        Leave us an open feedback about your experience so far
+                    </p>
+
+                    <input
+                        type="text"
+                        name="feedback"
+                        id="feedback"
+                        placeholder="Write your comment here"
+                    />
+
+                    <button id="submit">More Info</button>
                 </div>
             </main>
         </div>
