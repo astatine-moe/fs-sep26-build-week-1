@@ -8,11 +8,10 @@ body {
     -o-background-size: cover;
     background-size: cover;
 
-    font-family: "Montserrat", sans-serif;
-
-    font-family: "Prata", serif;
-
     color: white;
+}
+* {
+    font-family: "Montserrat", sans-serif;
 }
 
 header {
