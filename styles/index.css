@@ -8,3 +8,15 @@ body {
     -o-background-size: cover;
     background-size: cover;
 }
+
+header {
+    position: relative;
+    width: 100%;
+}
+
+header img {
+    position: absolute;
+    height: 3em;
+    left: 9vw;
+    top: 6vh;
+}
