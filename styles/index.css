@@ -1,22 +1,26 @@
 html,
 body {
-    margin: 0;
+  margin: 0;
 
-    background: url(../assets/bg.jpg) no-repeat center center fixed;
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
-    background-size: cover;
+  background: url(../assets/bg.jpg) no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+
+  font-family: "Montserrat", sans-serif;
+
+  font-family: "Prata", serif;
 }
 
 header {
-    position: relative;
-    width: 100%;
+  position: relative;
+  width: 100%;
 }
 
 header img {
-    position: absolute;
-    height: 3em;
-    left: 9vw;
-    top: 6vh;
+  position: absolute;
+  height: 3em;
+  left: 9vw;
+  top: 6vh;
 }
