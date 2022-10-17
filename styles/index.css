@@ -1,26 +1,54 @@
 html,
 body {
-  margin: 0;
+    margin: 0;
 
-  background: url(../assets/bg.jpg) no-repeat center center fixed;
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  background-size: cover;
+    background: url(../assets/bg.jpg) no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
 
-  font-family: "Montserrat", sans-serif;
+    font-family: "Montserrat", sans-serif;
 
-  font-family: "Prata", serif;
+    font-family: "Prata", serif;
+
+    color: white;
 }
 
 header {
-  position: relative;
-  width: 100%;
+    position: relative;
+    width: 100%;
 }
 
 header img {
-  position: absolute;
-  height: 3em;
-  left: 9vw;
-  top: 6vh;
+    position: absolute;
+    height: 3em;
+    left: 9vw;
+    top: 6vh;
+}
+
+h1 {
+    font-size: 60px;
+    font-weight: normal;
+}
+
+.epicode-cyan-text {
+    color: #00ffff;
+}
+.epicode-cyan-bg {
+    background-color: #00ffff;
+}
+.epicode-pink-text {
+    color: #d20094;
+}
+.epicode-pink-bg {
+    background-color: #d20094;
+}
+
+.answer-button {
+    background-color: #d20094;
+}
+
+.answer-button:hover {
+    background-color: #900080;
 }
