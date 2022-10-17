@@ -12,7 +12,7 @@
             <img src="./assets/epicode_logo.png" />
         </header>
         <main>
-            <div id="welcome-pane">
+            <div id="welcome-pane" class="hidden">
                 <h1>Welcome to <br /><strong>your exam</strong></h1>
 
                 <h3 class="epicode-pink-text">Instructions</h3>
@@ -50,9 +50,33 @@
                     </div>
                 </div>
             </div>
-            <div id="questions-pane"></div>
-            <div id="results-pane"></div>
-            <div id="feedback-pane"></div>
+            <div id="questions-pane">
+                <div class="timer">
+                    <span id="time">16 seconds</span> remaining
+                </div>
+                <div class="question">
+                    <h2>How can I create a checkbox in HTML?</h2>
+                    <div class="options">
+                        <div class="option">
+                            &lt;input type=&quot;check&quot;&gt;
+                        </div>
+                        <div class="option">
+                            &lt;input type=&quot;checkbox&quot;&gt;
+                        </div>
+                        <div class="option">&lt;checkbox&gt;</div>
+                        <div class="option">
+                            &lt;input type=&quot;button&quot;&gt;
+                        </div>
+                    </div>
+                </div>
+
+                <div class="question-counter">
+                    Question <span id="questionCurrent">1</span> of
+                    <span id="questionTotal">5</span>
+                </div>
+            </div>
+            <div id="results-pane" class="hidden"></div>
+            <div id="feedback-pane" class="hidden"></div>
         </main>
         <script src="./js/index.js"></script>
     </body>

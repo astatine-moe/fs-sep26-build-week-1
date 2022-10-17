@@ -117,3 +117,7 @@ main {
     background-color: #00d1d1;
     border-color: #00a3a3;
 }
+
+.hidden {
+    display: none;
+}
