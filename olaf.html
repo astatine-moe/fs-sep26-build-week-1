@@ -7,12 +7,51 @@
   </head>
   <body>
     <h1>Component testing</h1>
+    <ul>
+      <li>
+        <h3>How many letters are there in "JS"?</h3>
+        <input type="radio" name="question0" value="A" />2<br />
+        <input type="radio" name="question0" value="B" />1<br />
+        <input type="radio" name="question0" value="C" />3<br />
+        <input type="radio" name="question0" value="D" />4<br />
+      </li>
+      <li>
+        <h3>How many letters are there in "BMX"?</h3>
+        <input type="radio" name="question1" value="A" />2<br />
+        <input type="radio" name="question1" value="B" />1<br />
+        <input type="radio" name="question1" value="C" />3<br />
+        <input type="radio" name="question1" value="D" />4<br />
+      </li>
+      <li>
+        <h3>How many letters are there in "A"?</h3>
+        <input type="radio" name="question2" value="A" />2<br />
+        <input type="radio" name="question2" value="B" />1<br />
+        <input type="radio" name="question2" value="C" />3<br />
+        <input type="radio" name="question2" value="D" />4<br />
+      </li>
+    </ul>
+
+    <button onclick="returnScore()">View Results</button>
 
     <script>
-      var count = 0;
-      function increment() {
-        var counter_dom = document.getElementById("counter");
-        counter_dom.innerText = ++count;
+      var answers = ["A", "C", "B"],
+        tot = answers.length;
+
+      function getCheckedValue(radioName) {
+        var radios = document.getElementsByName(radioName); // Get radio group by-name
+        for (var y = 0; y < radios.length; y++)
+          if (radios[y].checked) return radios[y].value; // return the checked value
+      }
+
+      function getScore() {
+        var score = 0;
+        for (var i = 0; i < tot; i++)
+          if (getCheckedValue("question" + i) === answers[i]) score += 1; // increment only
+        return score;
+      }
+
+      function returnScore() {
+        alert("Your score is " + getScore() + "/" + tot);
       }
     </script>
   </body>
