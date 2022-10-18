@@ -1,50 +1,103 @@
-const timerCanvas = document.getElementById("timer");
-const timerCtx = timerCanvas.getContext("2d");
+const canvas = document.getElementById("timer");
+const ctx = canvas.getContext("2d");
 
 //create clockwise timer with a border and  text in middle that counts down from X
 
-class Timer {
-    constructor(x, y, radius, startAngle, endAngle, color, text, time) {
-        this.x = x;
-        this.y = y;
-        this.radius = radius;
-        this.startAngle = startAngle;
-        this.endAngle = endAngle;
-        this.color = color;
-        this.text = text;
-        this.time = time;
-    }
+const startTime = new Date();
+const time = 30 * 1000; // 60 seconds
+let arc = 0;
+let timeRemaining = 0;
+const thickness = 10;
+let finished = false;
 
-    draw() {
-        timerCtx.beginPath();
-        timerCtx.arc(
-            this.x,
-            this.y,
-            this.radius,
-            this.startAngle,
-            this.endAngle
-        );
-        timerCtx.lineWidth = 10;
-        timerCtx.strokeStyle = this.color;
-        timerCtx.stroke();
-        timerCtx.closePath();
-        timerCtx.font = "30px Arial";
-        timerCtx.textAlign = "center";
-        timerCtx.fillText(this.text, this.x, this.y + 10);
-    }
+const moveCircle = () => {
+    let now = new Date();
+    let timeElapsed = (startTime - now) * -1;
+    let percentageElapsed = timeElapsed / time;
 
-    update() {
-        timerCtx.clearRect(0, 0, timerCanvas.width, timerCanvas.height);
-        this.draw();
+    if (percentageElapsed < 1) {
+        arc = Math.PI * 1.5 - Math.PI * 2 * percentageElapsed;
     }
+};
+
+const drawCircle = () => {
+    ctx.beginPath();
+    ctx.arc(
+        canvas.width / 2,
+        canvas.height / 2,
+        canvas.height / 3,
+        0,
+        Math.PI * 2,
+        true
+    );
+    ctx.lineWidth = thickness;
+    ctx.strokeStyle = "rgba(255, 255, 255, 0.5)";
+    ctx.stroke();
+    ctx.beginPath();
+    ctx.arc(
+        canvas.width / 2,
+        canvas.height / 2,
+        canvas.height / 3,
+        Math.PI * 1.5,
+        arc,
+        true
+    );
+    ctx.lineWidth = thickness;
+    ctx.strokeStyle = "rgb(0, 254, 255)";
+    ctx.stroke();
+};
+
+const updateText = () => {
+    let now = new Date();
+    let timeElapsed = (startTime - now) * -1;
+
+    if (timeElapsed >= time) {
+        timeRemaining = "0";
+        finished = true;
+    } else {
+        timeRemaining = Math.floor((time - timeElapsed) / 1000);
+    }
+};
+
+function drawTime() {
+    ctx.font = canvas.height / 4 + "px Outfit";
+
+    ctx.font = canvas.height / 4 + "px Outfit";
+    ctx.textAlign = "center";
+    ctx.textBaseline = "middle";
+    ctx.fillStyle = "rgb(255,255,255)";
+    ctx.fillText(timeRemaining, canvas.width / 2, canvas.height / 2);
 }
 
-const timer = new Timer(100, 100, 50, 0, 2 * Math.PI, "black", "10", 10);
+function drawText() {
+    ctx.font = canvas.height / 20 + "px Outfit";
+    ctx.textAlign = "center";
+    ctx.textBaseline = "middle";
+    ctx.fillStyle = "rgb(255,255,255)";
+    ctx.fillText("SECONDS", canvas.width / 2, canvas.height / 3);
+    ctx.fillText("REMAINING", canvas.width / 2, canvas.height / 1.5);
+}
+const render = () => {
+    //clear canvas
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    moveCircle();
+    drawCircle();
+    updateText();
+    drawTime();
+    drawText();
+};
 
-timer.draw();
+let requestId = null;
 
-setInterval(function () {
-    timer.time--;
-    timer.text = timer.time;
-    timer.update();
-}, 1000);
+(function animationLoop() {
+    requestId = window.requestAnimationFrame(animationLoop);
+
+    if (!finished) {
+        render();
+    } else {
+        //disable animation loop
+        window.cancelAnimationFrame(requestId);
+        //timer done
+        alert("Timer complete");
+    }
+})();
