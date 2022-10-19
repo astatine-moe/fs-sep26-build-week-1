@@ -15,15 +15,15 @@
     <script>
       // DOUGHNUT PIE-CHART for results display
       var data = anychart.data.set([
-        ["Correct", 75],
-        ["Wrong", 25],
+        ["Wrong", 33, 3],
+        ["Correct", 66, 7],
       ]);
 
       var chart = anychart.pie(data); // create pie chart with data
 
       chart.innerRadius(`50%`);
 
-      chart.title("Results - The summary of your answers:");
+      chart.title("Results \n The summary of your answers:");
       chart.container(`container`);
       chart.draw();
 
@@ -31,10 +31,32 @@
       let palette = anychart.palettes.distinctColors();
 
       // set the colors according to the brands
-      palette.items([{ color: "#00ffff" }, { color: "#d20094" }]);
+      palette.items([{ color: "#d20094" }, { color: "#00ffff" }]);
 
       // apply the donut chart color palette
       chart.palette(palette);
+
+      chart.legend(false);
+      chart.labels(false);
+
+      // create label for display in middle
+      let label = anychart.standalones.label();
+
+      // configure the label
+
+      label
+        .useHtml(true)
+        .text(
+          '<span style = "color: #313136; font-size:20px;"> Congratulations! <br/> You passed the exam</span>' +
+            '<br/><br/></br><span style="color:#444857; font-size: 14px;"><i> Well send you the certificate <br/>in a few minutes.</i><br/>Check your email (including <br/> promotions / spam folder) </span>'
+        )
+        .position("center")
+        .anchor("center")
+        .hAlign("center")
+        .vAlign("middle");
+
+      // set the label as the center content
+      chart.center().content(label);
     </script>
   </body>
 </html>
