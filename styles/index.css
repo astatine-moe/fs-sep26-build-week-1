@@ -106,6 +106,10 @@ main {
   padding-top: 3em;
 }
 
+#welcome-pane {
+  height: 100%;
+}
+
 #welcome-pane h3 {
   font-size: 30px;
   font-weight: bold;
@@ -127,9 +131,15 @@ main {
   margin-bottom: 0.5em;
 }
 
+#promise {
+  width: 29px;
+  height: 29px;
+}
+
 #welcome-pane .promise {
   display: flex;
   justify-content: space-between;
+  margin-top: 20em;
 }
 
 #welcome-pane button {
@@ -151,6 +161,16 @@ main {
 #welcome-pane button:hover {
   background-color: #00d1d1;
   border-color: #00a3a3;
+}
+
+#checkbox {
+  width: 70%;
+}
+
+#checkbox input {
+  height: 29px;
+  width: 29px;
+  aspect-ratio: 1/1;
 }
 
 #questions-pane {
