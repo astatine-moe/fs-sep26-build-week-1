@@ -1,0 +1,22 @@
+.stars {
+    display: flex;
+    justify-content: space-around;
+    width: 75%;
+    margin: 3em auto;
+    margin-bottom: 4em;
+
+    cursor: pointer;
+}
+.stars .star {
+    width: 3.5em;
+    aspect-ratio: 1/1;
+    background-image: url(../assets/star.svg);
+    background-size: contain;
+
+    filter: brightness(0.25) contrast(0);
+    transition: filter 0.25s;
+}
+
+.stars .star.active {
+    filter: brightness(1);
+}
