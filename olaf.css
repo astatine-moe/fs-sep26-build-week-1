@@ -1,0 +1,11 @@
+body,
+#container {
+  font-family: outfit;
+  margin: 0;
+  padding: 0;
+  height: 50vh;
+}
+
+body {
+  height: 100vh;
+}

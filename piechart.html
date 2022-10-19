@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <script src="https://cdn.anychart.com/releases/8.10.0/js/anychart-core.min.js"></script>
+    <script src="https://cdn.anychart.com/releases/8.10.0/js/anychart-pie.min.js"></script>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./olaf.css" />
+    <title>Donut</title>
+  </head>
+  <body>
+    <div id="container"></div>
+
+    <script>
+      // DOUGHNUT PIE-CHART for results display
+      var data = anychart.data.set([
+        ["Correct", 75],
+        ["Wrong", 25],
+      ]);
+
+      var chart = anychart.pie(data); // create pie chart with data
+
+      chart.innerRadius(`50%`);
+
+      chart.title("Results - The summary of your answers:");
+      chart.container(`container`);
+      chart.draw();
+
+      // create a color palette
+      let palette = anychart.palettes.distinctColors();
+
+      // set the colors according to the brands
+      palette.items([{ color: "#00ffff" }, { color: "#d20094" }]);
+
+      // apply the donut chart color palette
+      chart.palette(palette);
+    </script>
+  </body>
+</html>
