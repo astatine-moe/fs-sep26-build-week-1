@@ -4,7 +4,7 @@ const ctx = canvas.getContext("2d");
 //create clockwise timer with a border and  text in middle that counts down from X
 
 const startTime = new Date();
-const time = 30 * 1000; // 60 seconds
+const time = 5 * 1000; // 60 seconds
 let arc = 0;
 let timeRemaining = 0;
 const thickness = 10;
@@ -66,16 +66,29 @@ function drawTime() {
     ctx.textAlign = "center";
     ctx.textBaseline = "middle";
     ctx.fillStyle = "rgb(255,255,255)";
-    ctx.fillText(timeRemaining, canvas.width / 2, canvas.height / 2);
+    ctx.fillText(
+        !finished ? timeRemaining : "-",
+        canvas.width / 2,
+        canvas.height / 2
+    );
 }
 
 function drawText() {
-    ctx.font = canvas.height / 20 + "px Outfit";
+    ctx.font = canvas.height / (!finished ? 20 : 10) + "px Outfit";
     ctx.textAlign = "center";
     ctx.textBaseline = "middle";
     ctx.fillStyle = "rgb(255,255,255)";
-    ctx.fillText("SECONDS", canvas.width / 2, canvas.height / 3);
-    ctx.fillText("REMAINING", canvas.width / 2, canvas.height / 1.5);
+
+    ctx.fillText(
+        !finished ? "SECONDS" : "TIMES",
+        canvas.width / 2,
+        canvas.height / 3
+    );
+    ctx.fillText(
+        !finished ? "REMAINING" : "UP",
+        canvas.width / 2,
+        canvas.height / 1.5
+    );
 }
 const render = () => {
     //clear canvas
@@ -98,6 +111,5 @@ let requestId = null;
         //disable animation loop
         window.cancelAnimationFrame(requestId);
         //timer done
-        alert("Timer complete");
     }
 })();
