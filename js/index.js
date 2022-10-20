@@ -13,6 +13,7 @@ let starsRated = 1;
 
 window.onload = () => {
     togglePane("welcome-pane");
+    document.getElementById("questionTotal").innerText = questions.length;
 };
 
 const welcome = {
@@ -47,7 +48,7 @@ startQuestions.addEventListener("click", () => {
     startQuestions.style.display = "none";
     document.querySelector(".question").classList.remove("hidden");
     document.querySelector(".question-counter").classList.remove("hidden");
-    timer.start();
+    // timer.start();
 });
 
 /* Results */
