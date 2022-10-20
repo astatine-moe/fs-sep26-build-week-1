@@ -91,6 +91,13 @@
 
       document.getElementById("incorrectPercent").innerHTML =
         wrongPercentage() + "%";
+
+      //switch h4 with DOM
+      document.getElementById("correcth4").innerHTML =
+        score() + "/" + questions.length;
+
+      document.getElementById("incorrech4").innerHTML =
+        questions.length - score + "/" + questions.length;
     </script>
   </body>
 </html>
