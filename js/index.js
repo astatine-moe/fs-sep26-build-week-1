@@ -13,6 +13,7 @@ let starsRated = 1;
 
 window.onload = () => {
     togglePane("welcome-pane");
+    document.getElementById("questionTotal").innerText = questions.length;
 };
 
 const welcome = {
@@ -32,14 +33,6 @@ welcome.promiseCheckbox.addEventListener("change", () => {
     welcome.proceedButton.disabled = !welcome.promiseCheckbox.checked;
 });
 
-const timer = new Timer("question-timer", 15);
-
-// timer.start();
-
-timer.addEventListener("done", () => {
-    togglePane("results-pane");
-});
-
 /* QUESTIONS */
 const startQuestions = document.querySelector("#startQuestions");
 
@@ -47,7 +40,6 @@ startQuestions.addEventListener("click", () => {
     startQuestions.style.display = "none";
     document.querySelector(".question").classList.remove("hidden");
     document.querySelector(".question-counter").classList.remove("hidden");
-    timer.start();
 });
 
 /* Results */
