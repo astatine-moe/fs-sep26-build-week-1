@@ -159,3 +159,6 @@ let questions = [
         ],
     },
 ];
+
+//only use 3 questions for testing
+questions = questions.slice(0, 3);

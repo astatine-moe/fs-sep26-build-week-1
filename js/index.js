@@ -1,4 +1,14 @@
+let questionIndex = 0;
+let clicked = false;
+let score = 0;
+let questionsShown = false;
+let invalidated = false;
+let invalidateInt;
+
+let pieChart = document.querySelector(".pie-chart");
+
 const togglePane = (paneId) => {
+    pieChart.style.display = "none";
     const pane = document.querySelector("#" + paneId);
     const allPanes = document.querySelectorAll(".pane");
 
@@ -42,11 +52,92 @@ rateUs.addEventListener("click", () => {
 });
 
 const showResults = (score) => {
+    questionsShown = false;
     console.log(
         `Amount of questions correct: ${score}`,
         `Total amount of questions: ${questions.length}`
     );
+
+    let total = questions.length;
+    let correct = score;
+    let incorrect = total - score;
+
+    const correctPercentage = function (score) {
+        return (100 * score) / questions.length;
+    };
+
+    const wrongPercentage = function (score) {
+        return ((questions.length - score) / questions.length) * 100;
+    };
+
+    var data = anychart.data.set([
+        ["Wrong", wrongPercentage(score)],
+        ["Correct", correctPercentage(score)],
+    ]);
+
+    var chart = anychart.pie(data); // create pie chart with data
+
+    chart.innerRadius(`70%`);
+    chart.background("transparent");
+    chart.container(`container`);
+    chart.draw();
+
+    // create a color palette
+    let palette = anychart.palettes.distinctColors();
+
+    // set the colors according to the brands
+    palette.items([{ color: "#d20094" }, { color: "#00ffff" }]);
+
+    // apply the donut chart color palette
+    chart.palette(palette);
+
+    chart.legend(false);
+    chart.labels(false);
+
+    // create label for display in middle
+    let label = anychart.standalones.label();
+
+    // configure the label
+    // loop that checks results and gives a second text failed that works dynamically with test results below 60%
+
+    let html =
+        '<span style = "color: white; font-size:20px;"> Congratulations! <br/> You passed the exam</span>' +
+        '<br/><br/></br><span style="color:white; font-size: 14px;"><i> Well send you the certificate <br/>in a few minutes.</i><br/>Check your email (including <br/> promotions / spam folder) </span>';
+
+    //if less than 60% correct
+
+    if (correctPercentage(score) < 60) {
+        html =
+            '<span style = "color: white; font-size:20px;"> Sorry! <br/> You failed the exam</span></span>';
+    }
+
+    label
+        .useHtml(true)
+        .text(html)
+        .position("center")
+        .anchor("center")
+        .hAlign("center")
+        .vAlign("middle");
+
+    // set the label as the center content
+    chart.center().content(label);
+
+    // switch h3 with DOM
+    document.getElementById("correctPercent").innerHTML =
+        correctPercentage(score).toFixed(2) + "%";
+
+    document.getElementById("incorrectPercent").innerHTML =
+        wrongPercentage(score).toFixed(2) + "%";
+
+    //switch h4 with DOM
+    document.getElementById("correcth4").innerHTML =
+        score + "/" + questions.length + " questions";
+
+    document.getElementById("incorrecth4").innerHTML =
+        questions.length - score + "/" + questions.length + " questions";
+
     togglePane("results-pane");
+    pieChart.style.display = "block";
 };
 
 /* feedback pane */

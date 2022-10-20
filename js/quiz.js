@@ -1,12 +1,5 @@
 /* QUESTIONS */
 
-let questionIndex = 0;
-let clicked = false;
-let score = 0;
-let questionsShown = false;
-let invalidated = false;
-let invalidateInt;
-
 const getQuestion = (index) => {
     const question = questions[index];
 
