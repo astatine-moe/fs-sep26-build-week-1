@@ -3,6 +3,9 @@
 let questionIndex = 0;
 let clicked = false;
 let score = 0;
+let questionsShown = false;
+let invalidated = false;
+let invalidateInt;
 
 const getQuestion = (index) => {
     const question = questions[index];
@@ -17,6 +20,7 @@ const questionCurrent = document.querySelector("#questionCurrent");
 let timer;
 
 const showQuestion = (question) => {
+    questionsShown = true;
     questionTitle.innerText = question.question;
     questionOptions.innerHTML = "";
     questionCurrent.innerText = questionIndex + 1;
@@ -30,6 +34,7 @@ const showQuestion = (question) => {
         optionDiv.innerText = option;
 
         optionDiv.addEventListener("click", () => {
+            clearTimeout(invalidateInt);
             if (!clicked) {
                 timer.stop();
                 clicked = true;
@@ -55,6 +60,7 @@ const showQuestion = (question) => {
     timer.start();
 
     timer.addEventListener("done", function () {
+        clearTimeout(invalidateInt);
         //timer ended
         //don't add to score, just move on to next question and count as incorrect
         if (questionIndex === questions.length - 1) {
@@ -80,10 +86,35 @@ startQuestions.addEventListener("click", () => {
     showQuestion(question);
 });
 
-document.addEventListener("visibilitychange", function () {
-    if (document.visibilityState === "hidden") {
-        //user tabbed out, show pane
-    } else {
-        timer.resume();
+const onFocus = () => {
+    if (questionsShown) {
+        clearTimeout(invalidateInt);
+        togglePane("questions-pane");
+
+        if (invalidated) {
+            //don't start next question till the user tabs back in
+            invalidated = false;
+            questionIndex++;
+            showQuestion(getQuestion(questionIndex));
+        }
     }
-});
+};
+
+const onBlur = () => {
+    if (questionsShown) {
+        togglePane("tabout-pane");
+
+        clearTimeout(invalidateInt);
+        invalidateInt = setTimeout(() => {
+            timer.stop();
+
+            invalidated = true;
+
+            console.log("Last question invalidated");
+            //invalidate after 10 seconds
+        }, 10 * 1000);
+    }
+};
+
+window.onfocus = onFocus;
+window.onblur = onBlur;
