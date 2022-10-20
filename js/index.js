@@ -9,6 +9,8 @@ const togglePane = (paneId) => {
     pane.style.removeProperty("display");
 };
 
+let starsRated = 1;
+
 window.onload = () => {
     togglePane("welcome-pane");
 };
@@ -57,6 +59,24 @@ rateUs.addEventListener("click", () => {
 });
 
 /* feedback pane */
+const stars = document.querySelectorAll(".star");
+
+stars.forEach((s) => {
+    s.addEventListener("click", () => {
+        stars.forEach((s) => {
+            s.classList.remove("active");
+        });
+
+        const starId = parseInt(s.id.split("-")[1]);
+
+        starsRated = starId;
+
+        for (let i = 1; i <= starId; i++) {
+            // console.log(i);
+            document.querySelector("#star-" + i).classList.add("active");
+        }
+    });
+});
 
 /* panes list */
 const paneLi = document.querySelectorAll(".pane-list ul li");

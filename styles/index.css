@@ -415,6 +415,8 @@ main {
     width: 75%;
     margin: 3em auto;
     margin-bottom: 4em;
+
+    cursor: pointer;
 }
 .stars .star {
     width: 3.5em;
@@ -422,11 +424,16 @@ main {
     background-image: url(../assets/star.svg);
     background-size: contain;
 
-    filter: brightness(0.25);
+    filter: brightness(0.25) contrast(0);
+    transition: filter 0.25s, transform 0.25s ease-in-out;
+}
+
+.stars .star.active {
+    filter: brightness(1);
 }
 
 .stars .star:hover {
-    filter: brightness(1);
+    transform: scale(1.25);
 }
 
 .pane-list {
