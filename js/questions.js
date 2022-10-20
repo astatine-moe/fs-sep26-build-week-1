@@ -96,4 +96,68 @@ let questions = [
       "document.getElementsByTagName()"
              ],
   },
+  
+    {
+    numb:11,
+    question:"Which command adds the we just created to the DOM?",
+    answer:"document.body.appendChild(button)",
+    options: [
+      "document.insert(button)", 
+      "document.body.appendChild(button)",
+      "window.appendChild(button)",
+      "document.insertBefore(button)"
+             ],
+  },
+  
+    {
+    numb:12,
+    question:"What method allows us to add an attribute to a DOM element?",
+    answer:"element.setAttribute()",
+    options: [
+      "element.getAttribute()", 
+      "element.createAttribute()",
+      "element.setAttribute()",
+      "element.makeAttribute()"
+             ],
+  },
+  
+  
+  
+    {
+    numb:13,
+    question:"Which are valid CSS property names in JavaScript?",
+    answer:"background",
+    options: [
+      "fontFamily", 
+      "background-position",
+      "marginTop",
+      "background"
+             ],
+  },
+  
+  
+  
+    {
+    numb:14,
+    question:"How can we access the data attributes of an HTML element from within JavaScript?",
+    answer:"element.dataset()",
+    options: [
+      "element.getData()", 
+      "element.dataset()",
+      "element.db()",
+      "element.fetchData()"
+             ],
+  },
+  
+      {
+    numb:15,
+    question:"Select the first element with the selector statement .main .title .t1.?",
+    answer:'document.querySelector(".main .title .t1")',
+    options: [
+      'document.querySelectorAll(".main .title .t1")', 
+      'document.querySelector(".main .title .t1")',
+      'document.getElementsByClassname("main")',
+      'document.getElementByClassname(".main .title .t1")'
+             ],
+  },
 ];
