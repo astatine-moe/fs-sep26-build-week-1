@@ -33,15 +33,6 @@ welcome.promiseCheckbox.addEventListener("change", () => {
     welcome.proceedButton.disabled = !welcome.promiseCheckbox.checked;
 });
 
-/* QUESTIONS */
-const startQuestions = document.querySelector("#startQuestions");
-
-startQuestions.addEventListener("click", () => {
-    startQuestions.style.display = "none";
-    document.querySelector(".question").classList.remove("hidden");
-    document.querySelector(".question-counter").classList.remove("hidden");
-});
-
 /* Results */
 
 const rateUs = document.querySelector("#rate-us");
