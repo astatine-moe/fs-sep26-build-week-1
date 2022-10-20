@@ -105,12 +105,12 @@ class Timer extends EventTarget {
     }
 
     animationLoop() {
-        let int = setInterval(() => {
+        this.int = setInterval(() => {
             if (!this.finished) {
                 this.render();
             } else {
                 //disable animation loop
-                clearInterval(int);
+                clearInterval(this.int);
                 //timer done
                 this.dispatchEvent(new Event("done"));
             }
@@ -123,7 +123,7 @@ class Timer extends EventTarget {
         this.animationLoop();
     }
     stop() {
-        this.finished = true;
+        clearInterval(this.int);
     }
 }
 
