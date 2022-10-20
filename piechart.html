@@ -31,8 +31,8 @@
 
       // DOUGHNUT PIE-CHART for results display
       var data = anychart.data.set([
-        ["Wrong", 33, 3],
-        ["Correct", 66, 7],
+        ["Wrong", wrongPercentage],
+        ["Correct", correctPercentage],
       ]);
 
       var chart = anychart.pie(data); // create pie chart with data
