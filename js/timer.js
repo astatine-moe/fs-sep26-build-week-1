@@ -1,115 +1,138 @@
-const canvas = document.getElementById("timer");
-const ctx = canvas.getContext("2d");
-
-//create clockwise timer with a border and  text in middle that counts down from X
-
-const startTime = new Date();
-const time = 5 * 1000; // 60 seconds
-let arc = 0;
-let timeRemaining = 0;
-const thickness = 10;
-let finished = false;
-
-const moveCircle = () => {
-    let now = new Date();
-    let timeElapsed = (startTime - now) * -1;
-    let percentageElapsed = timeElapsed / time;
-
-    if (percentageElapsed < 1) {
-        arc = Math.PI * 1.5 - Math.PI * 2 * percentageElapsed;
+class Timer extends EventTarget {
+    constructor(id, seconds, thickness = 12.5) {
+        super();
+        this.id = id;
+        this.startTime = 0;
+        this.time = seconds * 1000;
+        this.timeRemaining = 0;
+        this.thickness = thickness;
+        this.arc = 0;
+        this.finished = false;
+        this.canvas = document.getElementById(id);
+        this.ctx = this.canvas.getContext("2d");
     }
-};
 
-const drawCircle = () => {
-    ctx.beginPath();
-    ctx.arc(
-        canvas.width / 2,
-        canvas.height / 2,
-        canvas.height / 3,
-        0,
-        Math.PI * 2,
-        true
-    );
-    ctx.lineWidth = thickness;
-    ctx.strokeStyle = "rgba(255, 255, 255, 0.5)";
-    ctx.stroke();
-    ctx.beginPath();
-    ctx.arc(
-        canvas.width / 2,
-        canvas.height / 2,
-        canvas.height / 3,
-        Math.PI * 1.5,
-        arc,
-        true
-    );
-    ctx.lineWidth = thickness;
-    ctx.strokeStyle = "rgb(0, 254, 255)";
-    ctx.stroke();
-};
+    moveCircle() {
+        let now = new Date();
+        let timeElapsed = (this.startTime - now) * -1;
+        let percentageElapsed = timeElapsed / this.time;
 
-const updateText = () => {
-    let now = new Date();
-    let timeElapsed = (startTime - now) * -1;
-
-    if (timeElapsed >= time) {
-        timeRemaining = "0";
-        finished = true;
-    } else {
-        timeRemaining = Math.floor((time - timeElapsed) / 1000);
+        if (percentageElapsed < 1) {
+            this.arc = Math.PI * 1.5 - Math.PI * 2 * percentageElapsed;
+        }
     }
-};
 
-function drawTime() {
-    ctx.font = canvas.height / 4 + "px Outfit";
+    drawCircle() {
+        this.ctx.beginPath();
+        this.ctx.arc(
+            this.canvas.width / 2,
+            this.canvas.height / 2,
+            this.canvas.height / 3,
+            0,
+            Math.PI * 2,
+            true
+        );
+        this.ctx.lineWidth = this.thickness;
+        this.ctx.strokeStyle = "rgba(255, 255, 255, 0.5)";
+        this.ctx.stroke();
+        this.ctx.beginPath();
+        this.ctx.arc(
+            this.canvas.width / 2,
+            this.canvas.height / 2,
+            this.canvas.height / 3,
+            Math.PI * 1.5,
+            this.arc,
+            true
+        );
+        this.ctx.lineWidth = this.thickness;
+        this.ctx.strokeStyle = "rgb(0, 254, 255)";
+        this.ctx.stroke();
+    }
 
-    ctx.font = canvas.height / 4 + "px Outfit";
-    ctx.textAlign = "center";
-    ctx.textBaseline = "middle";
-    ctx.fillStyle = "rgb(255,255,255)";
-    ctx.fillText(
-        !finished ? timeRemaining : "-",
-        canvas.width / 2,
-        canvas.height / 2
-    );
+    updateText() {
+        let now = new Date();
+        let timeElapsed = (this.startTime - now) * -1;
+
+        if (timeElapsed >= this.time) {
+            this.timeRemaining = "0";
+            this.finished = true;
+        } else {
+            this.timeRemaining = Math.floor((this.time - timeElapsed) / 1000);
+        }
+    }
+
+    drawTime() {
+        this.ctx.font = this.canvas.height / 4 + "px Outfit";
+
+        this.ctx.font = this.canvas.height / 4 + "px Outfit";
+        this.ctx.textAlign = "center";
+        this.ctx.textBaseline = "middle";
+        this.ctx.fillStyle = "rgb(255,255,255)";
+        this.ctx.fillText(
+            !this.finished ? this.timeRemaining : "-",
+            this.canvas.width / 2,
+            this.canvas.height / 2
+        );
+    }
+
+    drawText() {
+        this.ctx.font =
+            this.canvas.height / (!this.finished ? 20 : 10) + "px Outfit";
+        this.ctx.textAlign = "center";
+        this.ctx.textBaseline = "middle";
+        this.ctx.fillStyle = "rgb(255,255,255)";
+
+        this.ctx.fillText(
+            !this.finished ? "SECONDS" : "TIMES",
+            this.canvas.width / 2,
+            this.canvas.height / 3
+        );
+        this.ctx.fillText(
+            !this.finished ? "REMAINING" : "UP",
+            this.canvas.width / 2,
+            this.canvas.height / 1.5
+        );
+    }
+
+    render() {
+        //clear canvas
+        this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+        this.moveCircle();
+        this.drawCircle();
+        this.updateText();
+        this.drawTime();
+        this.drawText();
+    }
+
+    animationLoop() {
+        let int = setInterval(() => {
+            if (!this.finished) {
+                this.render();
+            } else {
+                //disable animation loop
+                clearInterval(int);
+                //timer done
+                this.dispatchEvent(new Event("done"));
+            }
+        }, 10);
+    }
+
+    start() {
+        this.startTime = new Date();
+        this.render();
+        this.animationLoop();
+    }
+    stop() {
+        this.finished = true;
+    }
 }
 
-function drawText() {
-    ctx.font = canvas.height / (!finished ? 20 : 10) + "px Outfit";
-    ctx.textAlign = "center";
-    ctx.textBaseline = "middle";
-    ctx.fillStyle = "rgb(255,255,255)";
+// const timer = new Timer("timer", 10);
 
-    ctx.fillText(
-        !finished ? "SECONDS" : "TIMES",
-        canvas.width / 2,
-        canvas.height / 3
-    );
-    ctx.fillText(
-        !finished ? "REMAINING" : "UP",
-        canvas.width / 2,
-        canvas.height / 1.5
-    );
-}
-const render = () => {
-    //clear canvas
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    moveCircle();
-    drawCircle();
-    updateText();
-    drawTime();
-    drawText();
-};
+// timer.addEventListener("done", () => {
+//     console.log("finished");
+// });
 
-let requestId = null;
-
-(function animationLoop() {
-    requestId = window.requestAnimationFrame(animationLoop);
-
-    if (!finished) {
-        render();
-    } else {
-        //disable animation loop
-        window.cancelAnimationFrame(requestId);
-        //timer done
-    }
-})();
+// setTimeout(() => {
+//     timer.start();
+// }, 1000);
