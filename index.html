@@ -1,86 +1,75 @@
 <html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>EPICODE Benchmark</title>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>EPICODE Benchmark</title>
 
-        <link rel="stylesheet" href="./styles/index.css" />
-    </head>
-    <body>
-        <div class="pane-list">
-            <ul>
-                <li>welcome-pane</li>
-                <li>questions-pane</li>
-                <li>results-pane</li>
-                <li>feedback-pane</li>
-            </ul>
+    <link rel="stylesheet" href="./styles/index.css" />
+  </head>
+  <body>
+    <div class="pane-list">
+      <ul>
+        <li>welcome-pane</li>
+        <li>questions-pane</li>
+        <li>results-pane</li>
+        <li>feedback-pane</li>
+      </ul>
+    </div>
+    <div class="container">
+      <header>
+        <img src="./assets/epicode_logo.png" />
+      </header>
+      <main>
+        <div id="welcome-pane" class="pane" style="display: none">
+          <h1>Welcome to <br /><strong>your exam</strong></h1>
+
+          <h3 class="epicode-pink-text">Instructions</h3>
+          <p>
+            We don't expect most engineers to know the answers to all of these
+            questions, so don't worry if you're unsure of a few of them.
+          </p>
+
+          <ul>
+            <li>
+              Each question is <strong>timed</strong> and can only be
+              <strong>answered once.</strong>
+            </li>
+            <li>
+              Changing browser tab or opening other windows will
+              <strong>invalidate the question.</strong>
+            </li>
+            <li>
+              This exam will take approx.
+              <strong>0-5 minutes.</strong>
+            </li>
+          </ul>
+
+          <div class="promise">
+            <div class="promise-checkbox-container">
+              <input type="checkbox" name="promise" id="promise" />
+              <label for="promise"
+                >I promise to answer myself without help from anyone</label
+              >
+            </div>
+            <div>
+              <button disabled id="proceed">Proceed</button>
+            </div>
+          </div>
         </div>
-        <div class="container">
-            <header>
-                <img src="./assets/epicode_logo.png" />
-            </header>
-            <main>
-                <div id="welcome-pane" class="pane" style="display: none">
-                    <h1>Welcome to <br /><strong>your exam</strong></h1>
-
-                    <h3 class="epicode-pink-text">Instructions</h3>
-                    <p>
-                        We don't expect most engineers to know the answers to
-                        all of these questions, so don't worry if you're unsure
-                        of a few of them.
-                    </p>
-
-                    <ul>
-                        <li>
-                            Each question is <strong>timed</strong> and can only
-                            be
-                            <strong>answered once.</strong>
-                        </li>
-                        <li>
-                            Changing browser tab or opening other windows will
-                            <strong>invalidate the question.</strong>
-                        </li>
-                        <li>
-                            This exam will take approx.
-                            <strong>0-5 minutes.</strong>
-                        </li>
-                    </ul>
-
-                    <div class="promise">
-                        <div class="promise-checkbox-container">
-                            <input
-                                type="checkbox"
-                                name="promise"
-                                id="promise"
-                            />
-                            <label for="promise"
-                                >I promise to answer myself without help from
-                                anyone</label
-                            >
-                        </div>
-                        <div>
-                            <button disabled id="proceed">Proceed</button>
-                        </div>
-                    </div>
-                </div>
-                <div id="questions-pane" class="pane" style="display: none">
-                    <div class="timer">
-                        <canvas
-                            id="question-timer"
-                            width="150"
-                            height="150"
-                        ></canvas>
-                    </div>
-                    <div class="text-center">
-                        <button id="startQuestions">Start Questions</button>
-                    </div>
-                    <div class="question hidden">
-                        <h2>
-                            <span id="title"></span>
-                        </h2>
-                        <div class="options">
-                            <!-- <div>
+        <div id="questions-pane" class="pane" style="display: none">
+          <div class="timer">
+            <canvas id="question-timer" width="150" height="150"></canvas>
+          </div>
+          <div class="text-center">
+            <button id="startQuestions">Start Questions</button>
+          </div>
+          <div class="question hidden">
+            <h2>
+              <span id="title"></span>
+            </h2>
+            <div class="options">
+              <!-- <div>
                                 <div class="option">
                                     &lt;input type=&quot;check&quot;&gt;
                                 </div>
@@ -98,80 +87,78 @@
                                     &lt;input type=&quot;button&quot;&gt;
                                 </div>
                             </div> -->
-                        </div>
-                    </div>
+            </div>
+          </div>
 
-                    <div class="question-counter hidden">
-                        QUESTION <span id="questionCurrent">0</span
-                        ><span style="color: #d20094"> / </span>
-                        <span id="questionTotal">0</span>
-                    </div>
-                </div>
-                <div id="results-pane" class="pane" style="display: none">
-                    <div class="header">
-                        <h2>Results</h2>
-                        <h3>The summary of your answers:</h3>
-                    </div>
-
-                    <div class="results">
-                        <div class="correct result">
-                            <h3>Correct</h3>
-                            <h3>66.7%</h3>
-                            <h4>4/6 questions</h4>
-                        </div>
-                        <div class="pie-chart">
-                            <img src="./assets/download.png" />
-                        </div>
-                        <div class="incorrect result">
-                            <h3>Incorrect</h3>
-                            <h3>33.3%</h3>
-                            <h4>2/6 questions</h4>
-                        </div>
-                    </div>
-                    <div class="footer">
-                        <button id="rate-us">Rate Us</button>
-                    </div>
-                </div>
-                <div id="feedback-pane" class="pane" style="display: none">
-                    <h1>Tell us how it's going</h1>
-                    <p>
-                        From 0 to 10, how likely are you to recommend EPICODE to
-                        a friend or a colleague?
-                    </p>
-                    <div class="stars">
-                        <div class="star active" id="star-1"></div>
-                        <div class="star" id="star-2"></div>
-                        <div class="star" id="star-3"></div>
-                        <div class="star" id="star-4"></div>
-                        <div class="star" id="star-5"></div>
-                        <div class="star" id="star-6"></div>
-                        <div class="star" id="star-7"></div>
-                        <div class="star" id="star-8"></div>
-                        <div class="star" id="star-9"></div>
-                        <div class="star" id="star-10"></div>
-                    </div>
-
-                    <p>
-                        Leave us an open feedback about your experience so far
-                    </p>
-
-                    <input
-                        type="text"
-                        name="feedback"
-                        id="feedback"
-                        placeholder="Write your comment here"
-                    />
-
-                    <button id="submit">More Info</button>
-                </div>
-            </main>
-
-            <footer></footer>
-            <div id="overlay"></div>
+          <div class="question-counter hidden">
+            QUESTION <span id="questionCurrent">0</span
+            ><span style="color: #d20094"> / </span>
+            <span id="questionTotal">0</span>
+          </div>
         </div>
-        <script src="./js/questions.js"></script>
-        <script src="./js/timer.js"></script>
-        <script src="./js/index.js"></script>
-        <script src="./js/quiz.js"></script>
-    </body>
+        <div id="results-pane" class="pane" style="display: none">
+          <div class="header">
+            <h2>Results</h2>
+            <h3>The summary of your answers:</h3>
+          </div>
+
+          <div class="results">
+            <div class="correct result">
+              <h3>Correct</h3>
+              <h3 id="correctPercent">66.7%</h3>
+              <h4>4/6 questions</h4>
+            </div>
+            <div class="pie-chart">
+              <img src="./assets/download.png" />
+            </div>
+            <div class="incorrect result">
+              <h3>Incorrect</h3>
+              <h3 id="incorrectPercent">33.3%</h3>
+              <h4>2/6 questions</h4>
+            </div>
+          </div>
+          <div class="footer">
+            <button id="rate-us">Rate Us</button>
+          </div>
+        </div>
+        <div id="feedback-pane" class="pane" style="display: none">
+          <h1>Tell us how it's going</h1>
+          <p>
+            From 0 to 10, how likely are you to recommend EPICODE to a friend or
+            a colleague?
+          </p>
+          <div class="stars">
+            <div class="star active" id="star-1"></div>
+            <div class="star" id="star-2"></div>
+            <div class="star" id="star-3"></div>
+            <div class="star" id="star-4"></div>
+            <div class="star" id="star-5"></div>
+            <div class="star" id="star-6"></div>
+            <div class="star" id="star-7"></div>
+            <div class="star" id="star-8"></div>
+            <div class="star" id="star-9"></div>
+            <div class="star" id="star-10"></div>
+          </div>
+
+          <p>Leave us an open feedback about your experience so far</p>
+
+          <input
+            type="text"
+            name="feedback"
+            id="feedback"
+            placeholder="Write your comment here"
+          />
+
+          <button id="submit">More Info</button>
+        </div>
+      </main>
+
+      <footer></footer>
+      <div id="overlay"></div>
+    </div>
+    <script src="./js/questions.js"></script>
+    <script src="./js/timer.js"></script>
+    <script src="./js/index.js"></script>
+    <script src="./js/quiz.js"></script>
+  </body>
 </html>
