@@ -41,6 +41,14 @@ rateUs.addEventListener("click", () => {
     togglePane("feedback-pane");
 });
 
+const showResults = (score) => {
+    console.log(
+        `Amount of questions correct: ${score}`,
+        `Total amount of questions: ${questions.length}`
+    );
+    togglePane("results-pane");
+};
+
 /* feedback pane */
 const stars = document.querySelectorAll(".star");
 
