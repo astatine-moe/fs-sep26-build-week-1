@@ -21,7 +21,7 @@ const showQuestion = (question) => {
     questionOptions.innerHTML = "";
     questionCurrent.innerText = questionIndex + 1;
 
-    timer = new Timer("question-timer", question.timerToAnswerInSeconds);
+    timer = new Timer("question-timer", question.timerToAnswerInSeconds || 30);
 
     for (const option of question.options) {
         const containerDiv = document.createElement("div");
