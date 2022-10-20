@@ -79,11 +79,17 @@
 
       // DOM to manipulate correct and wrong % on either side of donut
 
-      document.getElementById(correctPercent).innerHTML =
+      document.getElementById("correctPercent").innerHTML =
         correctPercentage() + "%";
 
-      document.getElementById(incorrectPercent).innerHTML =
+      document.getElementById("incorrectPercent").innerHTML =
         wrongPercentage() + "%";
+
+      document.getElementById("correcth4").innerHTML =
+        score() + "/" + questions.length;
+
+      document.getElementById("incorrecth4").innerHTML =
+        questions.length - score + "/" + questions.length;
     </script>
   </body>
 </html>
