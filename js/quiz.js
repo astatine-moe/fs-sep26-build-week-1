@@ -79,3 +79,11 @@ startQuestions.addEventListener("click", () => {
 
     showQuestion(question);
 });
+
+document.addEventListener("visibilitychange", function () {
+    if (document.visibilityState === "hidden") {
+        //user tabbed out, show pane
+    } else {
+        timer.resume();
+    }
+});
