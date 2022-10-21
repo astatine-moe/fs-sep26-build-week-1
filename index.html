@@ -82,26 +82,7 @@
                         <h2>
                             <span id="title"></span>
                         </h2>
-                        <div class="options">
-                            <!-- <div>
-                                <div class="option">
-                                    &lt;input type=&quot;check&quot;&gt;
-                                </div>
-                            </div>
-                            <div>
-                                <div class="option">
-                                    &lt;input type=&quot;checkbox&quot;&gt;
-                                </div>
-                            </div>
-                            <div>
-                                <div class="option">&lt;checkbox&gt;</div>
-                            </div>
-                            <div>
-                                <div class="option">
-                                    &lt;input type=&quot;button&quot;&gt;
-                                </div>
-                            </div> -->
-                        </div>
+                        <div class="options"></div>
                     </div>
 
                     <div class="question-counter hidden">
@@ -208,7 +189,12 @@
                     <p class="yellow" id="feedbackGiven"></p>
 
                     <button onclick="location.reload();">Restart Quiz</button>
-                    <button class="navigateToResults">Results</button>
+                    <button
+                        class="navigateToResults"
+                        onclick="togglePane('results-pane');"
+                    >
+                        Results
+                    </button>
                 </div>
             </main>
 
