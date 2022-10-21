@@ -31,6 +31,7 @@ const showQuestion = (question) => {
             if (!clicked) {
                 timer.stop();
                 clicked = true;
+                questionsChosen.push({ ...question, userAnswer: option });
                 if (question.answer === option) {
                     score++;
                 }
@@ -56,8 +57,13 @@ const showQuestion = (question) => {
         clearTimeout(invalidateInt);
         //timer ended
         //don't add to score, just move on to next question and count as incorrect
+        questionsChosen.push({
+            ...getQuestion(questionIndex),
+            userAnswer: null,
+        });
         if (questionIndex === questions.length - 1) {
             //if last question
+
             showResults(score);
         } else {
             questionIndex++;
@@ -87,8 +93,17 @@ const onFocus = () => {
         if (invalidated) {
             //don't start next question till the user tabs back in
             invalidated = false;
-            questionIndex++;
-            showQuestion(getQuestion(questionIndex));
+            questionsChosen.push({
+                ...getQuestion(questionIndex),
+                userAnswer: null,
+            });
+            if (questionIndex === questions.length - 1) {
+                //if last question
+                showResults(score);
+            } else {
+                questionIndex++;
+                showQuestion(getQuestion(questionIndex));
+            }
         }
     }
 };
