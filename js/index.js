@@ -4,11 +4,15 @@ let score = 0;
 let questionsShown = false;
 let invalidated = false;
 let invalidateInt;
+let questionsChosen = [];
 
 let pieChart = document.querySelector(".pie-chart");
 
 const togglePane = (paneId) => {
     pieChart.style.display = "none";
+    if (paneId === "results-pane") {
+        pieChart.style.display = "block";
+    }
     const pane = document.querySelector("#" + paneId);
     const allPanes = document.querySelectorAll(".pane");
 
@@ -52,6 +56,39 @@ rateUs.addEventListener("click", () => {
 });
 
 const showResults = (score) => {
+    const answers = document.querySelector("#answers");
+    //loop questions chosen
+
+    questionsChosen.forEach((question) => {
+        //use lists embedded in other lists
+        //set title
+        const questionTitle = document.createElement("li");
+        questionTitle.innerText = question.question;
+        answers.appendChild(questionTitle);
+
+        const options = document.createElement("ul");
+
+        question.options.forEach((option) => {
+            const optionLi = document.createElement("li");
+            optionLi.innerText = option;
+            options.appendChild(optionLi);
+
+            if (option === question.answer) {
+                optionLi.classList.add("correct");
+                if (option === question.userAnswer) {
+                    optionLi.classList.add("yourAnswerCorrect");
+                }
+            } else {
+                optionLi.classList.add("incorrect");
+                if (option === question.userAnswer) {
+                    optionLi.classList.add("yourAnswerIncorrect");
+                }
+            }
+        });
+
+        answers.appendChild(options);
+    });
+
     questionsShown = false;
     console.log(
         `Amount of questions correct: ${score}`,
@@ -153,6 +190,8 @@ stars.forEach((s) => {
 
         starsRated = starId;
 
+        document.getElementById("starsGiven").innerText = starId;
+
         for (let i = 1; i <= starId; i++) {
             // console.log(i);
             document.querySelector("#star-" + i).classList.add("active");
@@ -169,3 +208,46 @@ paneLi.forEach((li) => {
         togglePane(paneId);
     });
 });
+
+// document.getElementById("submit").addEventListener("click", () => {
+//     togglePane("overview-pane");
+// });
+// document.getElementById("answers-btn").addEventListener("click", () => {
+//     togglePane("answers-pane");
+// });
+// document.getElementById("feedback").addEventListener("input", () => {
+//     document.getElementById("feedbackGiven").innerText =
+//         document.getElementById("feedback").value || "Nothing given";
+// });
+
+// document.querySelector(".goToFeedback").addEventListener("click", () => {
+//     togglePane("feedback-pane");
+// });
+// document.querySelector(".goToResults").addEventListener("click", () => {
+//     togglePane("results-pane");
+// });
+// document.querySelector("#feedbackToResults").addEventListener("click", () => {
+//     togglePane("results-pane");
+// });
+
+document.querySelector(".navigateToResults").addEventListener("click", () => {
+    togglePane("results-pane");
+});
+document.querySelector(".goToResults").addEventListener("click", () => {
+    togglePane("results-pane");
+});
+document.querySelector(".navigateToFeedback").addEventListener("click", () => {
+    togglePane("feedback-pane");
+});
+
+document.querySelector(".navigateToOverview").addEventListener("click", () => {
+    togglePane("overview-pane");
+});
+
+document.querySelector(".navigateToAnswers").addEventListener("click", () => {
+    togglePane("answers-pane");
+});
+
+const debug = () => {
+    document.getElementById("debug").style.display = "block";
+};

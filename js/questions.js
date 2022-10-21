@@ -135,8 +135,7 @@ let questions = [
 
     {
         numb: 14,
-        question:
-            "How can we access the data attributes of an HTML element from within JavaScript?",
+        question: "How can we access the data attribute of an element?",
         answer: "element.dataset()",
         options: [
             "element.getData()",
@@ -160,5 +159,36 @@ let questions = [
     },
 ];
 
+//shuffle array
+function shuffle(array) {
+    var currentIndex = array.length,
+        temporaryValue,
+        randomIndex;
+
+    // While there remain elements to shuffle...
+    while (0 !== currentIndex) {
+        // Pick a remaining element...
+        randomIndex = Math.floor(Math.random() * currentIndex);
+        currentIndex -= 1;
+
+        // And swap it with the current element.
+        temporaryValue = array[currentIndex];
+        array[currentIndex] = array[randomIndex];
+        array[randomIndex] = temporaryValue;
+    }
+
+    return array;
+}
+
+questions = shuffle(questions);
+
+//loop options and shuffle
+for (let i = 0; i < questions.length; i++) {
+    questions[i].options = shuffle(questions[i].options);
+}
+
+//limit to 10 questions
+questions = questions.slice(0, 10);
+
 //only use 3 questions for testing
-questions = questions.slice(0, 3);
+// questions = questions.slice(0, 3);

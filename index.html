@@ -8,12 +8,14 @@
         <link rel="stylesheet" href="./styles/index.css" />
     </head>
     <body>
-        <div class="pane-list">
+        <div class="pane-list" id="debug" style="display: none">
             <ul>
                 <li>welcome-pane</li>
                 <li>questions-pane</li>
                 <li>results-pane</li>
                 <li>feedback-pane</li>
+                <li>answers-pane</li>
+                <li>overview-pane</li>
                 <li>tabout-pane</li>
             </ul>
         </div>
@@ -128,6 +130,9 @@
                     </div>
                     <div class="footer">
                         <button id="rate-us">Rate Us</button>
+                        <button id="answers-btn" class="navigateToAnswers">
+                            Answers
+                        </button>
                     </div>
                 </div>
                 <div id="feedback-pane" class="pane" style="display: none">
@@ -160,7 +165,12 @@
                         placeholder="Write your comment here"
                     />
 
-                    <button id="submit">More Info</button>
+                    <button id="submit" class="navigateToOverview">
+                        More Info
+                    </button>
+                    <button id="feedbackToResults" class="navigateToResults">
+                        Results
+                    </button>
                 </div>
                 <div id="tabout-pane" class="pane" style="display: none">
                     <h1 style="color: red">Changed window</h1>
@@ -175,13 +185,38 @@
                         do not return
                     </p>
                 </div>
+                <div id="answers-pane" style="display: none" class="pane">
+                    <h1>Answers</h1>
+                    <ul id="answers"></ul>
+                    <button class="goToResults navigateToResults">
+                        Results
+                    </button>
+                    <button class="goToFeedback navigateToFeedback">
+                        Rate us
+                    </button>
+                </div>
+                <div id="overview-pane" style="display: none" class="pane">
+                    <h1>Your response</h1>
+                    <p>Thank you for your feedback.</p>
+                    <p>
+                        You rated us
+                        <span id="starsGiven" class="yellow">1</span> star(s)
+                        out of <span class="yellow">10</span>
+                    </p>
+
+                    <p>With the feedback:</p>
+                    <p class="yellow" id="feedbackGiven"></p>
+
+                    <button onclick="location.reload();">Restart Quiz</button>
+                    <button class="navigateToResults">Results</button>
+                </div>
             </main>
 
             <footer></footer>
             <div id="overlay"></div>
         </div>
 
-        <div class="pie-chart" id="container"></div>
+        <div class="pie-chart" class="pane" id="container"></div>
         <script src="https://cdn.anychart.com/releases/8.10.0/js/anychart-core.min.js"></script>
         <script src="https://cdn.anychart.com/releases/8.10.0/js/anychart-pie.min.js"></script>
         <script src="./js/questions.js"></script>
