@@ -199,6 +199,18 @@ stars.forEach((s) => {
     });
 });
 
+document.getElementById("feedback"),
+    addEventListener("input", (e) => {
+        const feedback = e.target.value;
+
+        if (feedback.length > 0) {
+            document.getElementById("feedbackGiven").innerText = feedback;
+        } else {
+            document.getElementById("feedbackGiven").innerText =
+                "No feedback given";
+        }
+    });
+
 /* panes list */
 const paneLi = document.querySelectorAll(".pane-list ul li");
 
