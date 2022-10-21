@@ -423,6 +423,39 @@ main {
   transition: background-color 0.2s ease-in-out, border-color 0.2s ease-in-out;
 }
 
+#dashboard {
+  height: 80%;
+  padding: 30px;
+  width: 100%;
+}
+
+#dashboard div {
+  height: 37%;
+  text-align: center;
+  justify-content: space-between 100px;
+}
+
+#overview h1 {
+  text-align: center;
+  margin-top: -85vh;
+}
+
+.flexBlock {
+  text-align: center;
+}
+
+.flexItem {
+  font-size: 30px;
+  width: 40%;
+  height: 330px;
+  aspect-ratio: 1/1;
+}
+
+.flexSecond {
+  display: inline;
+  width: 40%;
+}
+
 .stars {
   display: flex;
   justify-content: space-around;
