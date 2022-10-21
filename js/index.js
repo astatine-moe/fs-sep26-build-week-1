@@ -209,30 +209,6 @@ paneLi.forEach((li) => {
     });
 });
 
-// document.getElementById("submit").addEventListener("click", () => {
-//     togglePane("overview-pane");
-// });
-// document.getElementById("answers-btn").addEventListener("click", () => {
-//     togglePane("answers-pane");
-// });
-// document.getElementById("feedback").addEventListener("input", () => {
-//     document.getElementById("feedbackGiven").innerText =
-//         document.getElementById("feedback").value || "Nothing given";
-// });
-
-// document.querySelector(".goToFeedback").addEventListener("click", () => {
-//     togglePane("feedback-pane");
-// });
-// document.querySelector(".goToResults").addEventListener("click", () => {
-//     togglePane("results-pane");
-// });
-// document.querySelector("#feedbackToResults").addEventListener("click", () => {
-//     togglePane("results-pane");
-// });
-
-document.querySelector(".navigateToResults").addEventListener("click", () => {
-    togglePane("results-pane");
-});
 document.querySelector(".goToResults").addEventListener("click", () => {
     togglePane("results-pane");
 });
@@ -251,3 +227,6 @@ document.querySelector(".navigateToAnswers").addEventListener("click", () => {
 const debug = () => {
     document.getElementById("debug").style.display = "block";
 };
+document.querySelector(".navigateToResults").addEventListener("click", () => {
+    togglePane("results-pane");
+});
